@@ -6,7 +6,7 @@ import SignIn from './signin.js';
 import SignUp from './signup.js';
 import Logout from './logout.js';
 import Forgot from './forgot.js';
-import Nav from '../../home/components/nav';
+import Nav from '../home/components/nav';
 
 class Login extends Component {
   constructor(props) {

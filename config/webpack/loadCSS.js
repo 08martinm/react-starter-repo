@@ -9,11 +9,19 @@ const styleLoader = {
   },
 };
 
-const cssLoader = {
+// const cssLoader = {
+//   loader: 'css-loader',
+//   options: {
+//     modules: false,
+//     importLoaders: 1,
+//   },
+// };
+
+const moduleLoader = {
   loader: 'css-loader',
   options: {
     modules: true,
-    importLoaders: 1,
+    importLoaders: 3,
     localIdentName: '[name]_[local]_[hash:base64:5]',
   },
 };
@@ -28,13 +36,23 @@ const postcssLoader = {
   },
 };
 
-exports.loadCSS = {
+// exports.loadCSS = {
+//   test: /\.(css|scss)$/,
+//   exclude: /\.module\.(css|scss)$/,
+//   use: env ? 
+//     [styleLoader, cssLoader, 'resolve-url-loader', postcssLoader, 'sass-loader'] :
+//     ExtractTextPlugin.extract({ 
+//       fallback: 'style-loader', 
+//       use: [cssLoader, 'resolve-url-loader', postcssLoader, 'sass-loader'],
+//     }),
+// };
+
+exports.loadCSSModules = {
   test: /\.(css|scss)$/,
   use: env ? 
-    [styleLoader, cssLoader, 'resolve-url-loader', postcssLoader, 'sass-loader'] :
-
+    [styleLoader, moduleLoader, 'resolve-url-loader', postcssLoader, 'sass-loader'] :
     ExtractTextPlugin.extract({ 
       fallback: 'style-loader', 
-      use: [cssLoader, 'resolve-url-loader', postcssLoader, 'sass-loader'],
+      use: [moduleLoader, 'resolve-url-loader', postcssLoader, 'sass-loader'],
     }),
 };

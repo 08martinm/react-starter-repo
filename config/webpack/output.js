@@ -1,4 +1,4 @@
-const path = process.env.NODE_ENV;
+const path = require('path');
 
 exports.output = {
   filename: 'bundle.js',

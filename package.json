@@ -11,44 +11,54 @@
     "start:serv": "webpack -p && nodemon server/index.js",
     "lint:js": "eslint app/ webpack.*.js --cache"
   },
-  "stylelint": {"extends": "stylelint-config-sass-guidelines"},
+  "stylelint": {
+    "extends": "stylelint-config-sass-guidelines"
+  },
   "babel": {
-    "plugins": ["syntax-dynamic-import"],
-    "env": {"development": {"plugins": ["react-hot-loader/babel"]}}
+    "plugins": [
+      "syntax-dynamic-import"
+    ],
+    "env": {
+      "development": {
+        "plugins": [
+          "react-hot-loader/babel"
+        ]
+      }
+    }
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
-    "babel-core": "^6.25.0", // Needed?
+    "babel-core": "^6.25.0",
     "babel-eslint": "^7.2.3",
     "babel-loader": "^7.1.1",
-    "babel-preset-env": "^1.5.2", // Needed?
-    "babel-preset-react": "^6.24.1", // Needed?
-    "babel-preset-stage-2": "^6.24.1", // Needed?
-    "bootstrap-loader": "^2.2.0", // Needed?
-    "bootstrap-sass": "^3.3.7", // Needed?
+    "babel-preset-env": "^1.5.2",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "bootstrap-loader": "^2.2.0",
+    "bootstrap-sass": "^3.3.7",
     "css-loader": "^0.28.4",
     "eslint": "^4.3.0",
     "eslint-loader": "^1.9.0",
-    "eslint-plugin-react": "^7.1.0", // Needed?
+    "eslint-plugin-react": "^7.1.0",
     "extract-text-webpack-plugin": "^2.1.2",
     "file-loader": "^0.11.2",
     "html-webpack-plugin": "^2.29.0",
+    "node-sass": "^4.5.3",
     "nodemon": "^1.11.0",
-    "node-sass": "^4.5.3", // Needed?
-    "precss": "^2.0.0",
     "postcss-loader": "^2.0.6",
-    "purify-css": "^1.2.5", // Needed?
-    "purifycss-webpack": "^0.7.0", // Needed?
+    "precss": "^2.0.0",
+    "purify-css": "^1.2.5",
+    "purifycss-webpack": "^0.7.0",
     "resolve-url-loader": "^2.1.0",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.18.2",
     "stylelint": "^8.0.0",
     "stylelint-config-sass-guidelines": "^3.1.0",
-    "stylelint-config-standard": "^17.0.0", // Needed?
+    "stylelint-config-standard": "^17.0.0",
     "url-loader": "^0.5.9",
-    "webpack": "^3.4.1",
-    "webpack-dev-server": "^2.5.0", // Needed?
-    "webpack-merge": "^4.1.0" // Needed?
+    "webpack": "2.1.0",
+    "webpack-dev-server": "^2.5.0",
+    "webpack-merge": "^4.1.0"
   },
   "dependencies": {
     "axios": "^0.16.2",

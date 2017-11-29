@@ -1,14 +1,13 @@
 import React, {Component} from 'react';
 import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom';
-import Proptypes from 'prop-types';
-import RoomSelector from './home/roomSelector';
-import Home from './home';
-import Verify from './pages/login/verify';
-import Login from './pages/login';
-import Reset from './pages/login/reset';
-import Profile from './pages/profile';
-import styles from './App.css';
 import axios from 'axios';
+import PrivateRoute from './privateRoute';
+import RouteWithAuth from './routeWithAuth';
+import Home from '../pages/home';
+import Verify from '../pages/login/verify';
+import Login from '../pages/login';
+import Reset from '../pages/login/reset';
+import Profile from '../pages/profile';
 
 class App extends Component {
   constructor() {
@@ -18,7 +17,10 @@ class App extends Component {
     this.logout = this.logout.bind(this);
   }
 
-  login(username, email) {this.setState({loggedin: true, username: username, email: email});}
+  login(username, email) {
+    this.setState({loggedin: true, username, email});
+  }
+
   logout() {
     axios.get('/api/logout')
       .then(response => {
@@ -27,7 +29,6 @@ class App extends Component {
       });
   }
 
-  // Initializes whether user is loggedin
   componentDidMount() {
     let self = this;
     axios.get('/api/loggedin')
@@ -43,11 +44,12 @@ class App extends Component {
       username: this.state.username,
       loggedin: this.state.loggedin,
     };
+
     return (
       <Router>
-        <div className={`container-fluid ${styles.base}`}>
+        <div className='container-fluid'>
           <Switch>
-            <RouteWithAuth exact path='/' component={RoomSelector} handleAuth={handleAuth}/>
+            <RouteWithAuth exact path='/' component={Home} handleAuth={handleAuth}/>
             <RouteWithAuth path="/verify" component={Verify} handleAuth={handleAuth}/>
             <RouteWithAuth path='/login' component={Login} handleAuth={handleAuth}/>
             <RouteWithAuth path='/room' component={Home} handleAuth={handleAuth}/>
@@ -60,36 +62,5 @@ class App extends Component {
     );
   }
 }
-
-const PrivateRoute = ({ component: Component, handleAuth: handleAuth, auth: Auth, ...rest }) => (
-  <Route {...rest} render={props => (
-    Auth ? (
-      <Component handleAuth={handleAuth} {...props}/>
-    ) : (
-      <Redirect to={{
-        pathname: '/login',
-        state: { from: props.location },
-      }}/>
-    )
-  )}/>
-);
-
-PrivateRoute.propTypes = {
-  component: Proptypes.oneOfType([Proptypes.object, Proptypes.func]).isRequired,
-  location: Proptypes.object,
-  auth: Proptypes.bool.isRequired,
-  handleAuth: Proptypes.object.isRequired,
-};
-
-const RouteWithAuth = ({component: Component, handleAuth: handleAuth, ...rest}) => (
-  <Route {...rest} render={props => {
-    return <Component handleAuth={handleAuth} {...props}/>;}
-  } />
-);
-
-RouteWithAuth.propTypes = {
-  component: Proptypes.oneOfType([Proptypes.object, Proptypes.func]).isRequired,
-  handleAuth: Proptypes.object.isRequired,
-};
 
 export default App;

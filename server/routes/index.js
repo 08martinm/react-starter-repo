@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const passport = require('../passport.js');
+const passport = require('../utils/passport.js');
 const Login = require('./login');
 const Reset = require('./reset');
 const path = require('path');

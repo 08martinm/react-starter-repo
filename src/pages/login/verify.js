@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import styles from './login.scss';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import Nav from '../../home/components/nav';
+import Nav from '../home/components/nav';
 
 class Verification extends Component {
   constructor(props) {

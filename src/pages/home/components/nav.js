@@ -23,7 +23,7 @@ const Nav = props => {
           }
         </div>
         <div className={styles['text-container']}>
-          <h2 className={styles.title}>Bingo!</h2>
+          <h2 className={styles.title}>Title</h2>
         </div>
       </div>
     </div>
@@ -32,18 +32,6 @@ const Nav = props => {
 
 Nav.propTypes = {
   handleAuth: PropTypes.object.isRequired,
-};
-
-const NavItem = (props) => {
-  return (
-    <li className={styles.li}>
-      <a href={'#' + props.value} className={styles.a}>{props.value}</a>
-    </li>
-  );
-};
-
-NavItem.propTypes = {
-  value: PropTypes.string.isRequired,
 };
 
 export default Nav;
