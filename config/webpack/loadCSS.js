@@ -1,4 +1,4 @@
-const env = process.env.NODE_ENV;
+const env = process.env.NODE_ENV == 'production';
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const styleLoader = {
@@ -9,50 +9,46 @@ const styleLoader = {
   },
 };
 
-// const cssLoader = {
-//   loader: 'css-loader',
-//   options: {
-//     modules: false,
-//     importLoaders: 1,
-//   },
-// };
-
-const moduleLoader = {
+const cssLoader = {
   loader: 'css-loader',
-  options: {
-    modules: true,
-    importLoaders: 3,
-    localIdentName: '[name]_[local]_[hash:base64:5]',
-  },
+  options: {modules: false},
 };
 
 const postcssLoader = {
   loader: 'postcss-loader',
   options: {
-    plugins: () => ([
+    ident: 'postcss',
+    plugins: (loader) => ([
       require('autoprefixer')(),
-      require('precss')(),
     ]),
   },
 };
 
-// exports.loadCSS = {
-//   test: /\.(css|scss)$/,
-//   exclude: /\.module\.(css|scss)$/,
-//   use: env ? 
-//     [styleLoader, cssLoader, 'resolve-url-loader', postcssLoader, 'sass-loader'] :
-//     ExtractTextPlugin.extract({ 
-//       fallback: 'style-loader', 
-//       use: [cssLoader, 'resolve-url-loader', postcssLoader, 'sass-loader'],
-//     }),
-// };
-
-exports.loadCSSModules = {
+exports.loadCSS = {
   test: /\.(css|scss)$/,
+  exclude: /\.module\.(css|scss)$/,
   use: env ? 
-    [styleLoader, moduleLoader, 'resolve-url-loader', postcssLoader, 'sass-loader'] :
+    [styleLoader, cssLoader, postcssLoader, 'resolve-url-loader', 'sass-loader?sourceMap'] :
     ExtractTextPlugin.extract({ 
       fallback: 'style-loader', 
-      use: [moduleLoader, 'resolve-url-loader', postcssLoader, 'sass-loader'],
+      use: [cssLoader, postcssLoader, 'resolve-url-loader', 'sass-loader?sourceMap'],
+    }),
+};
+
+const cssModuleLoader = {
+  loader: 'css-loader',
+  options: {
+    modules: true,
+    localIdentName: '[name]_[local]_[hash:base64:5]',
+  },
+};
+
+exports.loadCSSModules = {
+  test: /\.module\.(css|scss)$/,
+  use: env ? 
+    [styleLoader, cssModuleLoader, postcssLoader, 'resolve-url-loader', 'sass-loader?sourceMap'] :
+    ExtractTextPlugin.extract({ 
+      fallback: 'style-loader', 
+      use: [cssModuleLoader, postcssLoader, 'resolve-url-loader', 'sass-loader?sourceMap'],
     }),
 };

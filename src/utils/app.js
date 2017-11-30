@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
-import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom';
+import {BrowserRouter as Router, /*Route,*/ Switch, Redirect} from 'react-router-dom';
 import axios from 'axios';
-import PrivateRoute from './privateRoute';
+// import PrivateRoute from './privateRoute';
 import RouteWithAuth from './routeWithAuth';
 import Home from '../pages/home';
-import Verify from '../pages/login/verify';
-import Login from '../pages/login';
-import Reset from '../pages/login/reset';
-import Profile from '../pages/profile';
+// import Verify from '../pages/login/verify';
+// import Login from '../pages/login';
+// import Reset from '../pages/login/reset';
+// import Profile from '../pages/profile';
 
 class App extends Component {
   constructor() {
@@ -47,20 +47,19 @@ class App extends Component {
 
     return (
       <Router>
-        <div className='container-fluid'>
-          <Switch>
-            <RouteWithAuth exact path='/' component={Home} handleAuth={handleAuth}/>
-            <RouteWithAuth path="/verify" component={Verify} handleAuth={handleAuth}/>
-            <RouteWithAuth path='/login' component={Login} handleAuth={handleAuth}/>
-            <RouteWithAuth path='/room' component={Home} handleAuth={handleAuth}/>
-            <Route path='/reset' component={Reset}/>
-            <PrivateRoute path='/profile' component={Profile} handleAuth={handleAuth} auth={this.state.loggedin}/>
-            <Redirect to='/' />
-          </Switch>
-        </div>
+        <Switch>
+          <RouteWithAuth exact path='/' component={Home} handleAuth={handleAuth}/>
+          <Redirect to='/' />
+        </Switch>
       </Router>
     );
   }
 }
 
 export default App;
+
+
+{/* <RouteWithAuth path="/verify" component={Verify} handleAuth={handleAuth}/>
+<RouteWithAuth path='/login' component={Login} handleAuth={handleAuth}/>
+<Route path='/reset' component={Reset}/>
+<PrivateRoute path='/profile' component={Profile} handleAuth={handleAuth} auth={this.state.loggedin}/> */}

@@ -9,7 +9,7 @@ module.exports = {
   module: {
     rules: [
       parts.lintCSS,
-      // parts.loadCSS,
+      parts.loadCSS,
       parts.loadCSSModules,
       parts.lintJS,
       parts.loadJS,

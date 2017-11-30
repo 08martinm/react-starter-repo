@@ -1,11 +1,15 @@
+const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
 const flash = require('connect-flash');
 const history = require('connect-history-api-fallback');
 const expressValidator = require('express-validator');
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
 const passport = require('./passport.js');
-const routes = require('./routes/index.js');
+const routes = require('../routes/index.js');
+const dbConnection = require('../db/connection.js');
 
 let addMiddleware = app => {
   app.use(flash());
@@ -18,7 +22,7 @@ let addMiddleware = app => {
     cookie: { maxAge: 24 * 60 * 60 * 1000 },
     saveUninitialized: false,
     store: new MongoStore({
-      mongooseConnection: db,
+      mongooseConnection: dbConnection.connection,
       clear_interval: 3600,
     }),
   }));
@@ -38,4 +42,4 @@ let addMiddleware = app => {
   app.use(express.static(__dirname + '/../public'));
 }
 
-export default addMiddleware;
+module.exports = addMiddleware;

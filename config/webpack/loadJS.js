@@ -1,9 +1,9 @@
-const env = process.env.NODE_ENV;
+const env = process.env.NODE_ENV == 'production';
 
 const babelLoader = {
   loader: 'babel-loader',
   options: { 
-    presets: ['env', 'react', 'stage-2'],
+    presets: ['env', 'react'],
     cacheDirectory: env,
   },
 };
