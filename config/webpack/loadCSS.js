@@ -4,21 +4,25 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const styleLoader = {
   loader: 'style-loader',
   options: {
-    sourceMap: true,
     convertToAbsoluteUrls: true,
+    sourceMap: true,
   },
 };
 
 const cssLoader = {
   loader: 'css-loader',
-  options: {modules: false},
+  options: {
+    modules: false,
+    sourceMap: true,
+  },
 };
 
 const postcssLoader = {
   loader: 'postcss-loader',
   options: {
+    sourceMap: true,
     ident: 'postcss',
-    plugins: (loader) => ([
+    plugins: () => ([
       require('autoprefixer')(),
     ]),
   },

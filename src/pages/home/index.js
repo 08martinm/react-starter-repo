@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import styles from './styles.module.scss';
 // import Nav from './components/nav';
 
 class Home extends Component {
@@ -12,7 +13,7 @@ class Home extends Component {
 
   render() {
     return (
-      <div className='row'>
+      <div className={`${styles.row}`}>
         Hello world!
       </div>
     );
