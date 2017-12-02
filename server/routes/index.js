@@ -1,12 +1,15 @@
-const router = require('express').Router();
+const express = require('express');
+const router = express.Router();
 const passport = require('../utils/passport.js');
 const Login = require('./login');
 const Reset = require('./reset');
 const path = require('path');
-let pathToHomePage = path.join(__dirname, '../../', 'public', 'index.html');
 
 // Home
-router.get('/', (req, res) => res.sendFile(pathToHomePage));
+router.get('/', function (req, res) {
+  console.log('pathToHomePage is', pathToHomePage);
+  res.render('index');
+});
 
 // Login
 router.get('/login', Login.auth);

@@ -8,8 +8,8 @@ const expressValidator = require('express-validator');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const passport = require('./passport.js');
-const routes = require('../routes/index.js');
-const dbConnection = require('../db/connection.js');
+const routes = require('./../routes/index.js');
+const dbConnection = require('./../db/connection.js');
 
 let addMiddleware = app => {
   app.use(flash());
@@ -38,8 +38,8 @@ let addMiddleware = app => {
   app.use(passport.session());
   app.use(expressValidator());
   app.use(history());
+  app.use(express.static(__dirname + './../../public'));
   app.use(routes);
-  app.use(express.static(__dirname + '/../public'));
 }
 
 module.exports = addMiddleware;

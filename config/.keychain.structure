@@ -1,2 +1,4 @@
-process.env.NODE_ENV = 'development'
-process.env.BABEL_ENV = 'development'
+process.env.NODE_ENV=?
+process.env.BABEL_ENV=?
+process.env.MONGOLAB_URI=?
+process.env.NODEMAILER_PW=?
